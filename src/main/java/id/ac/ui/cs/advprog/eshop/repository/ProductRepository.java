@@ -22,7 +22,7 @@ public class ProductRepository {
     }
 
     public Product edit(Product editProduct){
-        int productID = Integer.parseInt(editProduct.getProductId());
+        String productID = editProduct.getProductId();
         Product product = findProductByID(productID);
 
         String productName = editProduct.getProductName();
@@ -33,10 +33,10 @@ public class ProductRepository {
         return product;
     }
 
-    public Product findProductByID(int productId) {
+    public Product findProductByID(String productId) {
         for(Product currentProduct : productData){
-            int currentProductID = Integer.parseInt(currentProduct.getProductId());
-            if(currentProductID == productId){
+            String currentProductID = currentProduct.getProductId();
+            if(currentProductID.equals(productId)){
                 return currentProduct;
             }
         }
@@ -47,7 +47,7 @@ public class ProductRepository {
         productData.remove(deleteProduct);
     }
 
-    public void deleteProductById(int deleteId){
+    public void deleteProductById(String deleteId){
         delete(findProductByID(deleteId));
     }
 }
