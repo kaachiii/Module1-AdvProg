@@ -31,17 +31,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findProductByID(int productId) {
-        List<Product> allProduct = findAll();
-        for(Product currentProduct : allProduct){
-            int currentProductID = Integer.parseInt(currentProduct.getProductId());
-            if(currentProductID == productId){
-                return currentProduct;
-            }
-        }
-        return null;
+        return productRepository.findProductByID(productId);
     }
 
     public void edit(Product product){
         productRepository.edit(product);
+    }
+
+    @Override
+    public void deleteProductByID(int productId) {
+        productRepository.deleteProductById(productId);
     }
 }

@@ -21,22 +21,33 @@ public class ProductRepository {
         return productData.iterator();
     }
 
-    public Product edit(Product product){
-        for(Product currProduct : productData){
+    public Product edit(Product editProduct){
+        int productID = Integer.parseInt(editProduct.getProductId());
+        Product product = findProductByID(productID);
 
-            int currProductID = Integer.parseInt(currProduct.getProductId());
+        String productName = editProduct.getProductName();
+        int productQuantity = editProduct.getProductQuantity();
 
-            int productID = Integer.parseInt(product.getProductId());
-            String productName = product.getProductName();
-            int productQuantity = product.getProductQuantity();
+        product.setProductName(productName);
+        product.setProductQuantity(productQuantity);
+        return product;
+    }
 
-            if(currProductID == productID){
-                currProduct.setProductName(productName);
-                currProduct.setProductQuantity(productQuantity);
-                return currProduct;
+    public Product findProductByID(int productId) {
+        for(Product currentProduct : productData){
+            int currentProductID = Integer.parseInt(currentProduct.getProductId());
+            if(currentProductID == productId){
+                return currentProduct;
             }
         }
-        return null; // null case tidak mungkin terjadi karena ketika edit-product,
-                    // product dijamin ada pada productData
+        return null;
+    }
+
+    public void delete(Product deleteProduct){
+        productData.remove(deleteProduct);
+    }
+
+    public void deleteProductById(int deleteId){
+        delete(findProductByID(deleteId));
     }
 }
