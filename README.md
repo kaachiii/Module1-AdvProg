@@ -22,4 +22,16 @@ _Clean code principles_ dan _secure coding practices_ yang sudah saya terapkan p
 - Membuat berbagai _unit test_ dan _functional test_ untuk memastikan setiap komponen aplikasi bekerja dengan benar dan sesuai dengan spesifikasi.
 - Memvalidasi _input_ _quantity_ produk agar nilai kurang dari 0 secara otomatis diatur menjadi 0.
 
+Saya merasa _test_ yang saya buat masih sederhana dan mungkin belum mencakup semua _corner case_ sehingga masih dapat ditingkatkan lagi.
+
 ### Reflection 2
+1.
+- Bagaimana perasaan setelah membuat _unit-test_?
+- Berapa banyak _unit-test_ yang seharusnya dibuat di dalam sebuah _class_?
+- Bagaimana cara memastikan _unit-test_ cukup untuk memverifikasi program kita?
+- Apakah jika 100% _code coverage_ maka kode saya tidak memiliki _error/bugs_?
+
+2.
+- _Cleanliness of the code of the new functional test suite?_
+- Apakah _new code_ akan mengurangi _code quality_?
+- Identifikasi isu potensial _clean code_, jelaskan dengan alasan dan sarankan _improvement_ yang _possible_ untuk membuat _code cleaner_!
