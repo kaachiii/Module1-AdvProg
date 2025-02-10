@@ -32,7 +32,18 @@ Saya merasa _test_ yang saya buat masih sederhana dan mungkin belum mencakup sem
 
 
 - Berapa banyak _unit-test_ yang seharusnya dibuat di dalam sebuah _class_?
+
+  Jumlah _unit test_ yang seharusnya dibuat dalam sebuah _class_ tergantung pada kompleksitas dan jumlah fungsionalitas yang ada di dalamnya.
+
+
 - Bagaimana cara memastikan _unit-test_ cukup untuk memverifikasi program kita?
+    - Menggunakan _code coverage_ sebagai indikator.
+    - Menguji berbagai skenario yang ada.
+    - Memastikan _unit test_ bersifat independen dan konsisten.
+    - Menggunakan _static analysis_, seperti SonarQube.
+    - Melakukan _code review_ terhadap _unit-test_.
+
+
 - Apakah jika 100% _code coverage_ maka kode saya tidak memiliki _error/bugs_?
 
 2.
