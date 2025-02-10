@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class ProductRepository {
@@ -13,7 +14,7 @@ public class ProductRepository {
 
     public Product create(Product product) {
         productData.add(product);
-        product.setProductId(String.valueOf(productData.size()));
+        product.setProductId(UUID.randomUUID().toString());
         return product;
     }
 
