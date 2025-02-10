@@ -16,7 +16,7 @@ _Clean code principles_ dan _secure coding practices_ yang sudah saya terapkan p
 - Memisahkan program ke dalam berbagai _method/function_ untuk meningkatkan _reusability_ serta menjaga kerapihan kode.
 - Tidak mengulang _method_ yang sama di berbagai tempat, seperti _method_ `findProductByID` yang cukup dituliskan sekali dan dapat digunakan untuk _edit_ serta _delete_ produk.
 - Tidak berlebihan dalam memberikan _comments_.
-- Menggunakan _setter_ dan _getter_ dari pihak ketiga, yaitu `lombok`, untuk mengurangi _code boilerplate_, meningkatkan keterbacaan, dan membuat kode lebih ringkas.
+- Menggunakan _setter_ dan _getter_ dari pihak ketiga, yaitu `lombok`, untuk mengurangi _code boilerplate_, meningkatkan keterbacaan, serta membuat kode lebih ringkas.
 - Menerapkan _error handling_ pada bagian _test_, seperti `assertNull` dan `assertNotNull`.
 - Mengganti ID produk menjadi UUID untuk meningkatkan keamanan dan mencegah enumerasi saat mengedit atau menghapus produk.
 - Membuat berbagai _unit test_ dan _functional test_ untuk memastikan setiap komponen aplikasi bekerja dengan benar dan sesuai dengan spesifikasi.
