@@ -39,12 +39,9 @@ public class CreateProductFunctionalTest {
 
     @Test
     void pageTitle_isCorrect(ChromeDriver driver) throws Exception {
-        // Exercise
         driver.get(baseUrl);
-        String pageTitle = driver.getTitle();
-
-        // Verify
-        assertEquals("Create New Product", pageTitle);
+        String welcomeMessage = driver.findElement(By.tagName("h3")).getText();
+        assertEquals("Create New Product", welcomeMessage);
     }
 
     @Test

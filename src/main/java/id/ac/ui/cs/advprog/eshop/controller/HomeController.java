@@ -10,6 +10,6 @@ public class HomeController {
     @GetMapping("/")
     public String homePage(Model model) {
         model.addAttribute("title", "ADV Shop"); // Mengirim title ke Thymeleaf
-        return "HomePage"; // Pastikan nama ini sesuai dengan HomePage.html
+        return "HomePage";
     }
 }
