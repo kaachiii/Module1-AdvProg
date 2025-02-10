@@ -35,7 +35,7 @@ public class EditProductFunctionalTest {
         driver.get(String.format("%s:%d/product/create", testBaseUrl, serverPort));
 
         // Isi form pembuatan produk
-        driver.findElement(By.name("productName")).sendKeys("Susu");
+        driver.findElement(By.name("productName")).sendKeys("Stroberi");
         driver.findElement(By.name("productQuantity")).sendKeys("10");
         driver.findElement(By.tagName("button")).click();
 
@@ -46,7 +46,7 @@ public class EditProductFunctionalTest {
         WebElement editButton = null;
         for (WebElement row : rows) {
             WebElement nameCell = row.findElement(By.cssSelector("td:first-child")); // Kolom nama produk
-            if (nameCell.getText().equals("Susu")) {
+            if (nameCell.getText().equals("Stroberi")) {
                 editButton = row.findElement(By.cssSelector("a.btn.btn-primary.btn-sm"));
                 break;
             }
