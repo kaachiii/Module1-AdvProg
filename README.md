@@ -10,7 +10,7 @@ Module Advance Programming - B
 - [Reflection 2](#reflection-2)
 
 ### Reflection 1
-_Clean code principles_ dan _secure coding practices_ yang sudah saya aplikasikan pada kode saya:
+_Clean code principles_ dan _secure coding practices_ yang sudah saya terapkan pada kode saya:
 - Pemberian nama variabel yang bermakna dan tidak ambigu seperti `productID`, `productName`, `productQuantity`, etc. 
 - Pemberian nama _method_ yang bermakna dan tidak ambigu seperti _method_ `pageTitle_isCorrect`, `createProduct_isCorrect`, `buttonCreateProduct_isCorrect`, etc.
 - Memisahkan program ke dalam berbagai _method/function_ untuk meningkatkan _reusability_ serta menjaga kerapihan kode.
