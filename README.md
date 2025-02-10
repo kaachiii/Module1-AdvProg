@@ -27,6 +27,10 @@ Saya merasa _test_ yang saya buat masih sederhana dan mungkin belum mencakup sem
 ### Reflection 2
 1.
 - Bagaimana perasaan setelah membuat _unit-test_?
+
+  Setelah membuat dan menerapkan unit test, saya merasa lebih mudah dalam mendeteksi _bug_ sejak dini, sehingga masalah dapat diperbaiki sebelum berdampak lebih luas. Selain itu, _unit test_ membantu memastikan bahwa perubahan atau pembaruan kode tidak merusak fungsi yang sudah ada, sehingga saya lebih percaya diri dalam mengembangkan fitur baru. Dengan adanya _unit test_, proses _debugging_ menjadi lebih cepat dan efisien karena saya dapat langsung mengetahui bagian kode yang bermasalah tanpa harus memeriksa semuanya secara manual.
+
+
 - Berapa banyak _unit-test_ yang seharusnya dibuat di dalam sebuah _class_?
 - Bagaimana cara memastikan _unit-test_ cukup untuk memverifikasi program kita?
 - Apakah jika 100% _code coverage_ maka kode saya tidak memiliki _error/bugs_?
