@@ -46,6 +46,8 @@ Saya merasa _test_ yang saya buat masih sederhana dan mungkin belum mencakup sem
 
 - Apakah jika 100% _code coverage_ maka kode saya tidak memiliki _error/bugs_?
 
+  Tidak, 100% _code coverage_ tidak menjamin kode bebas _bug_. Meskipun semua baris kode telah diuji, kemungkinan untuk _logic error_, _edge case_ yang terlewat, atau _bug_ yang muncul saat integrasi antarkomponen masih ada. _Code coverage_ hanya memastikan kode telah dieksekusi oleh _unit test_, tetapi tidak menjamin hasilnya benar.
+
 2.
 - _Cleanliness of the code of the new functional test suite?_
 - Apakah _new code_ akan mengurangi _code quality_?
