@@ -50,5 +50,24 @@ Saya merasa _test_ yang saya buat masih sederhana dan mungkin belum mencakup sem
 
 2.
 - _Cleanliness of the code of the new functional test suite?_
+
+  Kode dalam _functional test suite_ baru kemungkinan kurang bersih karena terdapat duplikasi kode dari _suite_ sebelumnya. Jika _setup_ dan _instance variable_ yang sama digunakan berulang kali di beberapa _test suite_, sebaiknya refaktor kode dengan membuat kelas dasar (_base test class_) yang berisi setup umum. Dengan cara ini, setiap _test suite_ cukup mewarisi kelas dasar tersebut, sehingga kode menjadi lebih rapi, mudah dipelihara, dan mengurangi redundansi.
+
+
 - Apakah _new code_ akan mengurangi _code quality_?
-- Identifikasi isu potensial _clean code_, jelaskan dengan alasan dan sarankan _improvement_ yang _possible_ untuk membuat _code cleaner_!
+
+  Ya, _new code_ dapat mengurangi _code quality_ jika mengandung duplikasi dari _functional test suite_ sebelumnya. Mengulang _setup_ dan _instance variable_ di banyak tempat membuat kode lebih sulit dipelihara dan rentan terhadap inkonsistensi.
+
+
+- Identifikasi potensi isu _clean code_, jelaskan dengan alasan dan sarankan _improvement_ yang _possible_ untuk membuat _code cleaner_!
+
+  Potensi Isu _Clean Code_:
+    - Duplikasi Kode – Mengulang _setup_ dan _instance variable_ di beberapa _test suite_ membuat kode lebih sulit dipelihara.
+    - Keterbacaan Rendah – Sulit untuk _debugging_ jika banyak kode yang sama tersebar di beberapa _class_.
+    - _Code Bloat_ – Repetisi kode membuat kode lebih panjang dan tidak efisien.
+  
+  Saran Perbaikan:
+    - Menggunakan _Inheritance_ – Buat _BaseTestSuite_ yang berisi setup umum, lalu buat _test suite_ baru yang mewarisinya.
+    - Menggunakan _Utility Class_ – Jika setup tidak perlu diwarisi, gunakan _helper class_ atau _static method_ untuk menghindari duplikasi.
+    - Menggunakan _Parameterized Test_ – Jika _test case_ serupa, gunakan _JUnit Parameterized Test_ untuk menghindari pengulangan kode.
+
