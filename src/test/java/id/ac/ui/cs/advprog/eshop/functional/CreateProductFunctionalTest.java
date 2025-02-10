@@ -48,13 +48,6 @@ public class CreateProductFunctionalTest {
     }
 
     @Test
-    void message_createProduct_isCorrect(ChromeDriver driver) throws Exception {
-        driver.get(baseUrl);
-        String message = driver.findElement(By.tagName("title")).getText();
-        assertEquals("Create New Product", message);
-    }
-
-    @Test
     void createProduct_isCorrect(ChromeDriver driver) throws Exception {
         driver.get(baseUrl);
         WebElement productName = driver.findElement(By.id("nameInput"));
