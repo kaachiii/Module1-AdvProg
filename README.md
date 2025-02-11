@@ -20,7 +20,7 @@ _Clean code principles_ dan _secure coding practices_ yang sudah saya terapkan p
 - Mengganti ID produk menjadi UUID untuk meningkatkan keamanan dan mencegah enumerasi saat mengedit atau menghapus produk.
 - Memvalidasi _input_ _quantity_ produk agar nilai kurang dari 0 secara otomatis diatur menjadi 0.
 
-Saya merasa ada yang perlu ditingkatkan dalam kode saya, terutama dalam penggunaan _method_ untuk menghapus produk. Saat ini, saya masih menggunakan _method_ `GET` karena lebih mudah, tetapi sebaiknya menggunakan _method_ `POST` atau `DELETE` agar sesuai dengan standar dan lebih aman.
+Saya merasa ada yang bisa ditingkatkan dalam kode saya, terutama dalam penggunaan _method_ untuk menghapus produk. Saat ini, saya masih menggunakan _method_ `GET` karena lebih mudah, tetapi sebaiknya menggunakan _method_ `POST` atau `DELETE` agar sesuai dengan standar dan lebih aman.
 
 ### Reflection 2
 1.
