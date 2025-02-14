@@ -59,11 +59,11 @@ jobs:
       # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
       # format to the repository Actions tab.
 
-      - name: "Check if SARIF file exists"
-        run: ls -l results.sarif
+      # - name: "Check if SARIF file exists"
+      #   run: ls -l results.sarif
 
       - name: "Upload artifact"
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: sarif-file  # Ubah dari "sarif_file" ke "sarif-file"
           path: results.sarif
