@@ -46,6 +46,6 @@ jobs:
             -Dsonar.projectKey=kaachiii_Module1-AdvProg \
             -Dsonar.organization=kaachiii \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN
+            -Dsonar.login=$SONAR_TOKEN \
             -Dsonar.coverage.jacoco.xmlReportPaths=build/reports/jacoco/test/jacocoTestReport.xml
 
