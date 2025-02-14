@@ -3,9 +3,10 @@ name: SonarCloud Analysis
 on:
   push:
     branches:
-      - main
+      - '**'  # Menjalankan SonarCloud di semua branch
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches:
+      - '**'  # Menjalankan SonarCloud untuk semua PR
 
 jobs:
   sonar:
@@ -15,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Java (Jika menggunakan Java)
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
@@ -28,11 +29,14 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
+      - name: Build Project
+        run: mvn clean install -DskipTests
+
       - name: Run SonarCloud Analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn clean verify sonar:sonar \
+          mvn sonar:sonar \
             -Dsonar.projectKey=kaachiii_Module1-AdvProg \
             -Dsonar.organization=kaachiii \
             -Dsonar.host.url=https://sonarcloud.io \
