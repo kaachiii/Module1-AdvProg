@@ -29,11 +29,17 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
+      - name: Grant execute permission for Gradle
+        run: chmod +x gradlew
+
+      - name: Build Project
+        run: ./gradlew build -x test
+
       - name: Run SonarCloud Analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn sonar:sonar \
+          ./gradlew sonar \
             -Dsonar.projectKey=kaachiii_Module1-AdvProg \
             -Dsonar.organization=kaachiii \
             -Dsonar.host.url=https://sonarcloud.io \
