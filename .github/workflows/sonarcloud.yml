@@ -44,3 +44,4 @@ jobs:
             -Dsonar.organization=kaachiii \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
+
