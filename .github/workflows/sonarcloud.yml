@@ -35,6 +35,9 @@ jobs:
       - name: Build Project
         run: ./gradlew build -x test
 
+      - name: Run Tests and Generate Jacoco Report
+        run: ./gradlew test jacocoTestReport
+
       - name: Run SonarCloud Analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
