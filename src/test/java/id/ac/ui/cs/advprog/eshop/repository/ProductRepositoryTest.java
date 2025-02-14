@@ -38,6 +38,41 @@ public class ProductRepositoryTest {
     }
 
     @Test
+    void testCreateAndFindWithInvalidProductName() {
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Iterator<Product> productIterator = productRepository.findAll();
+        assertTrue(productIterator.hasNext());
+        Product savedProduct = productIterator.next();
+        assertEquals(product.getProductId(), savedProduct.getProductId());
+        assertEquals("Nama Produk Tidak Valid!", savedProduct.getProductName());
+        assertEquals(product.getProductQuantity(), savedProduct.getProductQuantity());
+    }
+
+    @Test
+    void testEditProductWithInvalidInput() {
+        Product product = new Product();
+        product.setProductId("da1900fd-96c7-41a7-9dcf-584982000257");
+        product.setProductName("Ayam Geprek");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+
+        Product editedProduct = new Product();
+        editedProduct.setProductId(product.getProductId());
+        editedProduct.setProductName("");
+        editedProduct.setProductQuantity(-1);
+        Product updatedProduct = productRepository.edit(editedProduct);
+
+        assertNotNull(updatedProduct);
+        assertEquals("Nama Produk Tidak Valid!", updatedProduct.getProductName());
+        assertEquals(0, updatedProduct.getProductQuantity());
+    }
+
+    @Test
     void testFindAllIfEmpty(){
         Iterator<Product> productIterator = productRepository.findAll();
         assertFalse(productIterator.hasNext());

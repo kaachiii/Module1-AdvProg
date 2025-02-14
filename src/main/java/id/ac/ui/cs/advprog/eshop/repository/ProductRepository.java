@@ -13,6 +13,12 @@ public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
     public Product create(Product product) {
+
+        // handle validasi input
+        if("".equals(product.getProductName())){
+            product.setProductName("Nama Produk Tidak Valid!");
+        }
+
         productData.add(product);
         product.setProductId(UUID.randomUUID().toString());
         return product;
@@ -28,6 +34,10 @@ public class ProductRepository {
 
         String productName = editProduct.getProductName();
         int productQuantity = editProduct.getProductQuantity();
+
+        if("".equals(productName)){
+            productName = "Nama Produk Tidak Valid!";
+        }
 
         product.setProductName(productName);
         product.setProductQuantity(productQuantity);
