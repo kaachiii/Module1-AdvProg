@@ -84,4 +84,9 @@ tasks.test{
 
 tasks.jacocoTestReport{
     dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)  // SonarCloud membaca laporan dalam format XML
+        csv.required.set(false)
+        html.required.set(true)
+    }
 }
