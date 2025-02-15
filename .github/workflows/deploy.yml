@@ -29,6 +29,6 @@ jobs:
 
       - name: Deploy to Koyeb
         run: |
-          curl -X POST https://api.koyeb.com/v1/apps/deploy \
+          curl -X POST https://app.koyeb.com/v1/apps/deploy \
           -H "Authorization: Bearer ${{ secrets.KOYEB_API_KEY }}" \
           -d '{"app_id": "fac63b1e-284e-4ff2-af14-8f0eb9c6f5f0"}'
