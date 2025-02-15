@@ -21,11 +21,11 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ghcr.io/kaachiii/Module1-AdvProg:latest -t ghcr.io/kaachiii/Module1-AdvProg:${{ github.sha }} .
+          docker build -t ghcr.io/kaachiii/module1-advprog:latest -t ghcr.io/kaachiii/module1-advprog:${{ github.sha }} .
 
       - name: Push Docker Image to GHCR
         run: |
-          docker push ghcr.io/kaachiii/Module1-AdvProg --all-tags
+          docker push ghcr.io/kaachiii/module1-advprog --all-tags
 
       - name: Deploy to Koyeb
         run: |
