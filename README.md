@@ -4,7 +4,7 @@ NPM : 2306227955
 
 ### Module Advance Programming - B
 
-Link deployment : [eshop-advprog-kaachiii.koyeb.app/](eshop-advprog-kaachiii.koyeb.app/)
+Link deployment : [https://eshop-advprog-kaachiii.koyeb.app/](https://eshop-advprog-kaachiii.koyeb.app/)
 
 ## Daftar Isi
 
