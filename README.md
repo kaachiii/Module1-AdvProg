@@ -4,6 +4,8 @@ NPM : 2306227955
 
 Module Advance Programming - B
 
+Link deployment : _eshop-advprog-kaachiii.koyeb.app/_
+
 ## Daftar Isi
 
 - [Reflection 1](#reflection-1)
