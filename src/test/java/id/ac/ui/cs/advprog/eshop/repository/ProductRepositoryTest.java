@@ -12,13 +12,15 @@ import java.util.Iterator;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductRepositoryTest {
+class ProductRepositoryTest {
 
     @InjectMocks
     ProductRepository productRepository;
 
     @BeforeEach
     void setUp() {
+        // This method is currently empty because there are no setup steps required for these tests.
+        // If initialization is needed in the future, it should be added here.
     }
 
     @Test

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class HomeControllerTest {
+class HomeControllerTest {
 
     @InjectMocks
     HomeController homeController;
@@ -22,6 +22,8 @@ public class HomeControllerTest {
 
     @BeforeEach
     void setUp() {
+        // This method is currently empty because there are no setup steps required for these tests.
+        // If initialization is needed in the future, it should be added here.
     }
 
     @Test

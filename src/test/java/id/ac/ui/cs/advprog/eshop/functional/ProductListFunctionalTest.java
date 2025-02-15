@@ -18,7 +18,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SeleniumJupiter.class)
-public class ProductListFunctionalTest {
+class ProductListFunctionalTest {
     /**
      * The port number assigned to the running application during test execution.
      * Set automatically during each test run by Spring Framework's test context.
@@ -40,21 +40,21 @@ public class ProductListFunctionalTest {
     }
 
     @Test
-    void pageTitle_isCorrect(ChromeDriver driver) throws Exception {
+    void pageTitle_isCorrect(ChromeDriver driver) {
         driver.get(baseUrl);
         String pageTitle = driver.getTitle();
         assertEquals("Product List", pageTitle);
     }
 
     @Test
-    void messageProductList_isCorrect(ChromeDriver driver) throws Exception {
+    void messageProductList_isCorrect(ChromeDriver driver) {
         driver.get(baseUrl);
         String welcomeMessage = driver.findElement(By.tagName("h2")).getText();
         assertEquals("Product' List", welcomeMessage);
     }
 
     @Test
-    void buttonCreateProduct_isCorrect(ChromeDriver driver) throws Exception {
+    void buttonCreateProduct_isCorrect(ChromeDriver driver) {
         // Buka halaman daftar produk
         driver.get(baseUrl);
 
@@ -77,7 +77,7 @@ public class ProductListFunctionalTest {
     }
 
     @Test
-    void deleteProduct_isCorrect(ChromeDriver driver) throws Exception {
+    void deleteProduct_isCorrect(ChromeDriver driver) {
         // Buka halaman pembuatan produk
         driver.get(String.format("%s:%d/product/create", testBaseUrl, serverPort));
 

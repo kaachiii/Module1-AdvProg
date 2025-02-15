@@ -18,7 +18,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SeleniumJupiter.class)
-public class EditProductFunctionalTest {
+class EditProductFunctionalTest {
 
     @LocalServerPort
     private int serverPort;
@@ -68,7 +68,7 @@ public class EditProductFunctionalTest {
     }
 
     @Test
-    void editProduct_isCorrect(ChromeDriver driver) throws Exception {
+    void editProduct_isCorrect(ChromeDriver driver) {
         // Buka halaman edit produk
         driver.get(baseUrl);
 
