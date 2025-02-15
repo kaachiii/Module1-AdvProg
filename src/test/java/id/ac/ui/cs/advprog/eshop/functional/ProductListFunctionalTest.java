@@ -18,7 +18,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ExtendWith(SeleniumJupiter.class)
-public class ProductListFunctionalTest {
+class ProductListFunctionalTest {
     /**
      * The port number assigned to the running application during test execution.
      * Set automatically during each test run by Spring Framework's test context.
