@@ -68,7 +68,7 @@ class EditProductFunctionalTest {
     }
 
     @Test
-    void editProduct_isCorrect(ChromeDriver driver) throws Exception {
+    void editProduct_isCorrect(ChromeDriver driver) {
         // Buka halaman edit produk
         driver.get(baseUrl);
 

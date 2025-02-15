@@ -40,21 +40,21 @@ class ProductListFunctionalTest {
     }
 
     @Test
-    void pageTitle_isCorrect(ChromeDriver driver) throws Exception {
+    void pageTitle_isCorrect(ChromeDriver driver) {
         driver.get(baseUrl);
         String pageTitle = driver.getTitle();
         assertEquals("Product List", pageTitle);
     }
 
     @Test
-    void messageProductList_isCorrect(ChromeDriver driver) throws Exception {
+    void messageProductList_isCorrect(ChromeDriver driver) {
         driver.get(baseUrl);
         String welcomeMessage = driver.findElement(By.tagName("h2")).getText();
         assertEquals("Product' List", welcomeMessage);
     }
 
     @Test
-    void buttonCreateProduct_isCorrect(ChromeDriver driver) throws Exception {
+    void buttonCreateProduct_isCorrect(ChromeDriver driver) {
         // Buka halaman daftar produk
         driver.get(baseUrl);
 
@@ -77,7 +77,7 @@ class ProductListFunctionalTest {
     }
 
     @Test
-    void deleteProduct_isCorrect(ChromeDriver driver) throws Exception {
+    void deleteProduct_isCorrect(ChromeDriver driver) {
         // Buka halaman pembuatan produk
         driver.get(String.format("%s:%d/product/create", testBaseUrl, serverPort));
 
