@@ -72,3 +72,10 @@ Saya merasa ada yang bisa ditingkatkan dalam kode saya, terutama dalam penggunaa
     - Menggunakan _Parameterized Test_ – Jika _test case_ serupa, gunakan _JUnit Parameterized Test_ untuk menghindari pengulangan kode.
 
 ### Reflection 3
+1. List the code quality issue(s) that you fixed during the exercise and explain your strategy on fixing them.
+- Penggunaan _modifier public_ pada beberapa _class_, seperti `HomeControllerTest`, `CreateProductFunctionalTest`, `EditProductFunctionalTest`, `ProductListFunctionalTest`, `ProductTest`, dan `ProductRepositoryTest` tidak perlu karena _class_ tersebut tetap bisa diakses oleh _class_ lain dalam _package_ yang sama, termasuk untuk keperluan _unit testing_. Solusinya adalah menghapus _modifier_ `public` yang tidak perlu agar kode lebih rapi dan sesuai dengan kebutuhan.
+- Penggunaan _field injection_ (`@Autowired` langsung pada _field_) pada beberapa _class_, seperti `ProductController` dan `ProductService`. Solusinya adalah menggantinya dengan _constructor injection_ agar _code_ lebih aman, lebih mudah diuji, dan sesuai dengan prinsip _Dependency Injection_.
+- Tidak adanya _comment_ pada _method_ kosong, seperti `setUp()`. Solusinya adalah menambahkan _comment_/keterangan pada _method_ tersebut untuk memudahkan proses _maintainability_ dan alasan kenapa _method_ tersebut kosong.
+- Penggunaan `throws Exception` yang tidak perlu pada beberapa _test_. Solusinya adalah menghapus `throws Exception` yang tidak perlu agar kode lebih rapi dan sesuai dengan kebutuhan.
+
+2. Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
