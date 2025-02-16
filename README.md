@@ -10,6 +10,7 @@ Link deployment : [https://eshop-advprog-kaachiii.koyeb.app/](https://eshop-advp
 
 - [Reflection 1](#reflection-1)
 - [Reflection 2](#reflection-2)
+- [Reflection 3](#reflection-3)
 
 ### Reflection 1
 _Clean code principles_ dan _secure coding practices_ yang sudah saya terapkan pada kode saya:
@@ -79,3 +80,5 @@ Saya merasa ada yang bisa ditingkatkan dalam kode saya, terutama dalam penggunaa
 - Penggunaan `throws Exception` yang tidak perlu pada beberapa _test_. Solusinya adalah menghapus `throws Exception` yang tidak perlu agar kode lebih rapi dan sesuai dengan kebutuhan.
 
 2. Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
+
+Menurut saya, implementasi _workflow_ GitHub saya saat ini sudah memenuhi definisi _Continuous Integration_ (CI) dan _Continuous Deployment_ (CD). Saya menggunakan GitHub Actions untuk menjalankan berbagai _workflow_, seperti `ci.yml`, `deploy.yml`, `scorecard.yml`, dan `sonarcloud.yml`. Untuk _Continuous Integration_, saya menggunakan `ci.yml` yang secara otomatis menjalankan semua _test_ setiap kali ada _push_ atau _pull request_. Selain itu, saya menggunakan `scorecard.yml` untuk mendeteksi potensi masalah keamanan pada _branch_ utama (`main`). Saya juga menerapkan _code scanning/analysis_ menggunakan SonarCloud dengan `sonarcloud.yml` untuk memeriksa dan menganalisis _code quality_ pada semua _branch_. Terakhir, saya menggunakan Koyeb sebagai PaaS yang terintegrasi langsung dengan _workflow_ di repositori saya menggunakan `deploy.yml`.
