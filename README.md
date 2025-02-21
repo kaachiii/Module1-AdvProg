@@ -82,12 +82,12 @@ Saya merasa ada yang bisa ditingkatkan dalam kode saya, terutama dalam penggunaa
 
 2. Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
 
-Menurut saya, implementasi _workflow_ GitHub saya saat ini sudah memenuhi definisi _Continuous Integration_ (CI) dan _Continuous Deployment_ (CD). Saya menggunakan GitHub Actions untuk menjalankan berbagai _workflow_, seperti `ci.yml`, `deploy.yml`, `scorecard.yml`, dan `sonarcloud.yml`. Untuk _Continuous Integration_, saya menggunakan `ci.yml` yang secara otomatis menjalankan semua _test_ setiap kali ada _push_ atau _pull request_. Selain itu, saya menggunakan `scorecard.yml` untuk mendeteksi potensi masalah keamanan pada _branch_ utama (`main`). Saya juga menerapkan _code scanning/analysis_ menggunakan SonarCloud dengan `sonarcloud.yml` untuk memeriksa dan menganalisis _code quality_ pada semua _branch_. Terakhir, saya menggunakan Koyeb sebagai PaaS yang terintegrasi langsung dengan _workflow_ di repositori saya menggunakan `deploy.yml`.
+    Menurut saya, implementasi _workflow_ GitHub saya saat ini sudah memenuhi definisi _Continuous Integration_ (CI) dan _Continuous Deployment_ (CD). Saya menggunakan GitHub Actions untuk menjalankan berbagai _workflow_, seperti `ci.yml`, `deploy.yml`, `scorecard.yml`, dan `sonarcloud.yml`. Untuk _Continuous Integration_, saya menggunakan `ci.yml` yang secara otomatis menjalankan semua _test_ setiap kali ada _push_ atau _pull request_. Selain itu, saya menggunakan `scorecard.yml` untuk mendeteksi potensi masalah keamanan pada _branch_ utama (`main`). Saya juga menerapkan _code scanning/analysis_ menggunakan SonarCloud dengan `sonarcloud.yml` untuk memeriksa dan menganalisis _code quality_ pada semua _branch_. Terakhir, saya menggunakan Koyeb sebagai PaaS yang terintegrasi langsung dengan _workflow_ di repositori saya menggunakan `deploy.yml`.
 
 ### Reflection 4
 1. Explain what principles you apply to your project!
 
-    Prinsip yang telah saya aplikasikan pada projek saya adalah:
+    Prinsip yang telah saya aplikasikan pada _project_ saya adalah:
 
 - _Single Responsibility Principle_ (SRP)
 
@@ -110,4 +110,9 @@ Menurut saya, implementasi _workflow_ GitHub saya saat ini sudah memenuhi defini
   Saya menerapkan DIP dengan menggunakan _interface_ (`CarManagementService` dan `ReadOnlyCarService`) pada `CarController`, dibanding langsung bergantung pada implementasi konkret (`CarServiceImpl`). Dengan cara ini, kode lebih mudah diuji, diperluas, dan tidak bergantung pada detail implementasi tertentu.
 
 2. Explain the advantages of applying SOLID principles to your project with examples.
+
+   Keuntungan menerapkan prinsip SOLID dalam _project_ saya adalah membuat kode lebih rapi, mudah dipahami, dan fleksibel untuk dikembangkan. Misalnya, SRP memastikan setiap kelas hanya memiliki satu tugas utama, sehingga perubahan tidak memengaruhi bagian lain. OCP memungkinkan penambahan fitur baru tanpa mengubah kode yang sudah ada. LSP memastikan bahwa turunan suatu kelas dapat digunakan tanpa mengubah perilaku sistem. ISP membagi _interface_ besar menjadi lebih spesifik agar kelas hanya mengimplementasikan _method_ yang benar-benar dibutuhkan. Terakhir, DIP mengurangi ketergantungan pada kelas konkret dengan menggunakan abstraksi, sehingga lebih mudah mengganti komponen tanpa harus mengubah banyak kode. Untuk contoh penerapannya sudah dijelaskan pada nomor 1.
+
 3. Explain the disadvantages of not applying SOLID principles to your project with examples.
+
+    Kerugian tidak menerapkan prinsip SOLID dalam _project_ saya adalah membuat kode menjadi sulit dipahami, sulit dikelola, dan rentan terhadap perubahan. Misalnya, jika `CarController` masih menjadi _subclass_ dari `ProductController`, `CarController` akan mewarisi _method_ yang sebenarnya tidak dibutuhkan. Hal ini dapat menyebabkan kebingungan dan meningkatkan risiko error jika _method_ yang tidak relevan tetap diturunkan. Selain itu, jika `CarController` dan `ProductController` masih berada dalam satu file yang sama membuat kode sulit dipahami dan dikelola.
