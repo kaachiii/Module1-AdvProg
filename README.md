@@ -11,6 +11,7 @@ Link deployment : [https://eshop-advprog-kaachiii.koyeb.app/](https://eshop-advp
 - [Reflection 1](#reflection-1)
 - [Reflection 2](#reflection-2)
 - [Reflection 3](#reflection-3)
+- [Reflection 4](#reflection-4)
 
 ### Reflection 1
 _Clean code principles_ dan _secure coding practices_ yang sudah saya terapkan pada kode saya:
@@ -82,3 +83,16 @@ Saya merasa ada yang bisa ditingkatkan dalam kode saya, terutama dalam penggunaa
 2. Look at your CI/CD workflows (GitHub)/pipelines (GitLab). Do you think the current implementation has met the definition of Continuous Integration and Continuous Deployment? Explain the reasons (minimum 3 sentences)!
 
 Menurut saya, implementasi _workflow_ GitHub saya saat ini sudah memenuhi definisi _Continuous Integration_ (CI) dan _Continuous Deployment_ (CD). Saya menggunakan GitHub Actions untuk menjalankan berbagai _workflow_, seperti `ci.yml`, `deploy.yml`, `scorecard.yml`, dan `sonarcloud.yml`. Untuk _Continuous Integration_, saya menggunakan `ci.yml` yang secara otomatis menjalankan semua _test_ setiap kali ada _push_ atau _pull request_. Selain itu, saya menggunakan `scorecard.yml` untuk mendeteksi potensi masalah keamanan pada _branch_ utama (`main`). Saya juga menerapkan _code scanning/analysis_ menggunakan SonarCloud dengan `sonarcloud.yml` untuk memeriksa dan menganalisis _code quality_ pada semua _branch_. Terakhir, saya menggunakan Koyeb sebagai PaaS yang terintegrasi langsung dengan _workflow_ di repositori saya menggunakan `deploy.yml`.
+
+### Reflection 4
+1. Explain what principles you apply to your project!
+
+Prinsip yang telah saya aplikasikan pada projek saya adalah:
+- _Single Responsibility Principle_ (SRP)
+Saya sudah menerapkan SRP dengan cara memisahkan `CarController` dengan `ProductController` agar setiap controller bertanggung jawab hanya pada tugasnya masing-masing. `CarController` berdiri sendiri tanpa mewarisi `ProductController` dan menggunakan interface `CarService` secara langsung. Selain itu, saya juga memindahkan inisialisasi ID ke dalam model `Car` sehingga pembuatan ID menjadi tanggung jawab objek itu sendiri, bukan `CarRepository`.
+- _Open/Closed Principle (OCP)_
+- _Liskov Substitution Principle (LSP)_
+- _Interface Segregation Principle (ISP)_
+- _Dependency Inversion Principle (DIP)_
+2. Explain the advantages of applying SOLID principles to your project with examples.
+3. Explain the disadvantages of not applying SOLID principles to your project with examples.
