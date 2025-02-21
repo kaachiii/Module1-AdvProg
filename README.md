@@ -87,22 +87,27 @@ Menurut saya, implementasi _workflow_ GitHub saya saat ini sudah memenuhi defini
 ### Reflection 4
 1. Explain what principles you apply to your project!
 
-Prinsip yang telah saya aplikasikan pada projek saya adalah:
+    Prinsip yang telah saya aplikasikan pada projek saya adalah:
+
 - _Single Responsibility Principle_ (SRP)
 
-Saya sudah menerapkan SRP dengan cara memisahkan `CarController` dengan `ProductController` agar setiap controller bertanggung jawab hanya pada tugasnya masing-masing. `CarController` berdiri sendiri tanpa mewarisi `ProductController` dan menggunakan interface `CarService` secara langsung. Selain itu, saya juga memindahkan inisialisasi ID ke dalam model `Car` sehingga pembuatan ID menjadi tanggung jawab objek itu sendiri, bukan `CarRepository`.
+  Saya menerapkan SRP dengan memisahkan `CarController` dan `ProductController`, sehingga masing-masing hanya bertanggung jawab atas tugasnya sendiri. `CarController` tidak lagi mewarisi `ProductController` dan langsung menggunakan _interface_ `CarService`. Selain itu, saya juga memindahkan inisialisasi ID ke dalam model `Car`, sehingga pembuatan ID menjadi tanggung jawab objek itu sendiri, bukan `CarRepository`.
 
-- _Open/Closed Principle (OCP)_
+- _Open/Closed Principle_ (OCP)
 
-Saya sudah menerapkan OCP dengan cara tidak menggunakan `CarServiceImpl` secara langsung pada `CarController`, melainkan dengan menggunakan interfacenya, yaitu `CarService`.
+  Saya menerapkan OCP dengan menggunakan _interface_ `CarService` di `CarController`, bukan `CarServiceImpl` secara langsung. Hal ini memungkinkan pengembangan tanpa harus mengubah kode yang sudah ada.
 
-- _Liskov Substitution Principle (LSP)_
+- _Liskov Substitution Principle_ (LSP)
 
+  Sebelumnya, `CarController` merupakan _subclass_ dari `ProductController`, meskipun memiliki perilaku yang berbeda. Untuk menerapkan LSP, saya memisahkan `CarController` agar berdiri sendiri tanpa mewarisi `ProductController`. Dengan cara ini, kode menjadi lebih fleksibel dan tidak ada _method_ warisan yang harus diabaikan atau diubah secara tidak semestinya.
 
-- _Interface Segregation Principle (ISP)_
+- _Interface Segregation Principle_ (ISP)
 
-Saya sudah menerapkan ISP dengan cara memisahkan interface CarService menjadi dua bagian, yaitu CarManagementService dan ReadOnlyCarService agar kode lebih modular dan fleksibel, misalnya jika ada layanan hanya untuk membaca data, kita cukup mengimplementasikan `ReadOnlyCarService` saja.
+  Saya membagi `CarService` menjadi dua _interface_: `CarManagementService` untuk operasi yang bisa mengubah data, dan `ReadOnlyCarService` untuk operasi yang hanya membaca data. Pemisahan ini membuat kode lebih modular dan fleksibel, sehingga layanan yang hanya membutuhkan akses baca tidak perlu mengimplementasikan _method_ yang tidak relevan.
 
-- _Dependency Inversion Principle (DIP)_
+- _Dependency Inversion Principle_ (DIP)
+
+  Saya menerapkan DIP dengan menggunakan _interface_ (`CarManagementService` dan `ReadOnlyCarService`) pada `CarController`, dibanding langsung bergantung pada implementasi konkret (`CarServiceImpl`). Dengan cara ini, kode lebih mudah diuji, diperluas, dan tidak bergantung pada detail implementasi tertentu.
+
 2. Explain the advantages of applying SOLID principles to your project with examples.
 3. Explain the disadvantages of not applying SOLID principles to your project with examples.
