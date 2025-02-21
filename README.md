@@ -89,10 +89,20 @@ Menurut saya, implementasi _workflow_ GitHub saya saat ini sudah memenuhi defini
 
 Prinsip yang telah saya aplikasikan pada projek saya adalah:
 - _Single Responsibility Principle_ (SRP)
+
 Saya sudah menerapkan SRP dengan cara memisahkan `CarController` dengan `ProductController` agar setiap controller bertanggung jawab hanya pada tugasnya masing-masing. `CarController` berdiri sendiri tanpa mewarisi `ProductController` dan menggunakan interface `CarService` secara langsung. Selain itu, saya juga memindahkan inisialisasi ID ke dalam model `Car` sehingga pembuatan ID menjadi tanggung jawab objek itu sendiri, bukan `CarRepository`.
+
 - _Open/Closed Principle (OCP)_
+
+Saya sudah menerapkan OCP dengan cara tidak menggunakan `CarServiceImpl` secara langsung pada `CarController`, melainkan dengan menggunakan interfacenya, yaitu `CarService`.
+
 - _Liskov Substitution Principle (LSP)_
+
+
 - _Interface Segregation Principle (ISP)_
+
+Saya sudah menerapkan ISP dengan cara memisahkan interface CarService menjadi dua bagian, yaitu CarManagementService dan ReadOnlyCarService agar kode lebih modular dan fleksibel, misalnya jika ada layanan hanya untuk membaca data, kita cukup mengimplementasikan `ReadOnlyCarService` saja.
+
 - _Dependency Inversion Principle (DIP)_
 2. Explain the advantages of applying SOLID principles to your project with examples.
 3. Explain the disadvantages of not applying SOLID principles to your project with examples.
