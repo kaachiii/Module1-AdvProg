@@ -27,7 +27,7 @@ public class Payment {
         this.order = order;
         this.method = method;
         this.paymentData = paymentData;
-        this.status = OrderStatus.WAITING_PAYMENT.getValue();
+        this.status = PaymentStatus.WAITING_PAYMENT.getValue();
 
         // Validasi sesuai metode pembayaran
         validatePayment();
