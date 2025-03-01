@@ -1,5 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.*;
@@ -42,7 +44,7 @@ public class PaymentTest {
         paymentData.put("voucherCode", "ESHOP0000000baba"); // Kurang 8 angka
         Payment payment = new Payment("a3e3e3e3-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "VOUCHER", paymentData);
 
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -51,7 +53,7 @@ public class PaymentTest {
         paymentData.put("voucherCode", "ESHOP0000000000"); // Kurang dari 16 karakter
         Payment payment = new Payment("a3e3e3e3-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "VOUCHER", paymentData);
 
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -60,7 +62,7 @@ public class PaymentTest {
         paymentData.put("voucherCode", "ESHO000000000000"); // Tidak diawali "ESHOP"
         Payment payment = new Payment("a3e3e3e3-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "VOUCHER", paymentData);
 
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -83,8 +85,8 @@ public class PaymentTest {
         paymentData.put("deliveryFee", "10000");
         Payment payment = new Payment("b3b3b3b3-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "COD", paymentData);
 
-        assertEquals("REJECTED", payment.getStatus());
-        assertEquals("FAILED", orders.get(1).getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertEquals(OrderStatus.FAILED.getValue(), orders.get(1).getStatus());
     }
 
     @Test
@@ -94,7 +96,7 @@ public class PaymentTest {
         paymentData.put("deliveryFee", ""); // Delivery fee kosong
         Payment payment = new Payment("c4c4c4c4-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "COD", paymentData);
 
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -118,7 +120,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", "123456");
         Payment payment = new Payment("e6e6e6e6-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "BANK", paymentData);
 
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -128,7 +130,7 @@ public class PaymentTest {
         paymentData.put("referenceCode", ""); // Reference code kosong
         Payment payment = new Payment("f7f7f7f7-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "BANK", paymentData);
 
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -141,8 +143,8 @@ public class PaymentTest {
 
         assertEquals("BANK", payment.getMethod());
         assertEquals(paymentData, payment.getPaymentData());
-        assertEquals("SUCCESS", payment.getStatus());
-        assertEquals("SUCCESS", orders.get(1).getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+        assertEquals(OrderStatus.SUCCESS.getValue(), orders.get(1).getStatus());
     }
 
     // ============ TEST STATUS PAYMENT =============
@@ -150,18 +152,18 @@ public class PaymentTest {
     @Test
     void testSetPaymentStatusSuccess() {
         Payment payment = new Payment("h9h9h9h9-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "VOUCHER", new HashMap<>());
-        payment.setStatus("SUCCESS");
+        payment.setStatus(PaymentStatus.SUCCESS.getValue());
 
-        assertEquals("SUCCESS", payment.getStatus());
-        assertEquals("SUCCESS", orders.get(1).getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+        assertEquals(OrderStatus.SUCCESS.getValue(), orders.get(1).getStatus());
     }
 
     @Test
     void testSetPaymentStatusRejected() {
         Payment payment = new Payment("i1i1i1i1-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "VOUCHER", new HashMap<>());
-        payment.setStatus("REJECTED");
+        payment.setStatus(PaymentStatus.REJECTED.getValue());
 
-        assertEquals("REJECTED", payment.getStatus());
-        assertEquals("FAILED", orders.get(1).getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertEquals(OrderStatus.FAILED.getValue(), orders.get(1).getStatus());
     }
 }
