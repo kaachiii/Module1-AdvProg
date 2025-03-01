@@ -16,8 +16,14 @@ public class PaymentTest {
         this.products = new ArrayList<>();
         this.orders = new ArrayList<>();
 
-        Product product1 = new Product("eb558e9f-1c39-460e-8860-71af6af63bd6", "Sampo Cap Bambang", 2);
-        Product product2 = new Product("a2c62328-4a37-4664-83c7-f32db8620155", "Sampo Cap Usep", 1);
+        Product product1 = new Product();
+        product1.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product1.setProductName("Sampo Cap Bambang");
+        product1.setProductQuantity(2);
+        Product product2 = new Product();
+        product2.setProductId("a2c62328-4a37-4664-83c7-f32db8620155");
+        product2.setProductName("Sampo Cap Usep");
+        product2.setProductQuantity(1);
         this.products.add(product1);
         this.products.add(product2);
 
