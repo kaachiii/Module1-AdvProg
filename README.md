@@ -12,6 +12,7 @@ Link deployment : [https://eshop-advprog-kaachiii.koyeb.app/](https://eshop-advp
 - [Reflection 2](#reflection-2)
 - [Reflection 3](#reflection-3)
 - [Reflection 4](#reflection-4)
+- [Reflection 5](#reflection-5)
 
 ### Reflection 1
 _Clean code principles_ dan _secure coding practices_ yang sudah saya terapkan pada kode saya:
@@ -116,3 +117,27 @@ Saya merasa ada yang bisa ditingkatkan dalam kode saya, terutama dalam penggunaa
 3. Explain the disadvantages of not applying SOLID principles to your project with examples.
 
     Kerugian tidak menerapkan prinsip SOLID dalam _project_ saya adalah membuat kode menjadi sulit dipahami, sulit dikelola, dan rentan terhadap perubahan. Misalnya, jika `CarController` masih menjadi _subclass_ dari `ProductController`, `CarController` akan mewarisi _method_ yang sebenarnya tidak dibutuhkan. Hal ini dapat menyebabkan kebingungan dan meningkatkan risiko _error_ jika _method_ yang tidak relevan tetap diturunkan. Selain itu, jika `CarController` dan `ProductController` masih berada dalam satu file yang sama rentan membuat pembaca sulit membedakan antara kedua _class_ tersebut.
+
+### Reflection 5
+1. Reflect based on Percival (2017) proposed self-reflective questions (in “Principles and Best Practice of Testing” submodule, chapter “Evaluating Your Testing Objectives”), whether this TDD flow is useful enough for you or not. If not, explain things that you need to do next time you make more tests.
+
+   Menurut saya, TDD membuat proses kerja menjadi lebih terstruktur dan efisien. Dengan membuat tes di awal, kita dapat memastikan kebenaran dan stabilitas kode yang dihasilkan. Namun demikian, saya merasa masih cukup sulit untuk menentukan kasus uji yang tepat di awal pengembangan.
+
+2. You have created unit tests in Tutorial. Now reflect whether your tests have successfully followed F.I.R.S.T. principle or not. If not, explain things that you need to do the next time you create more tests.
+    
+    Menurut saya, test yang saya buat sudah mengikuti prinsip F.I.R.S.T. karena test yang saya buat sudah:
+    - Fast
+   
+      Test berjalan dengan cepat tanpa memperlambat pengembangan.
+    - Independent
+
+      Test tidak bergantung pada test lain dan dapat dijalankan sendiri.
+    - Repeatable
+
+      Test memberikan hasil yang sama setiap kali dijalankan di env mana pun.
+    - Self-validating
+
+      Hasil test jelas, berhasil atau gagal, tanpa perlu analisis tambahan.
+    - Timely
+
+      Test dibuat sebelum/selama pengembangan, bukan setelahnya.
