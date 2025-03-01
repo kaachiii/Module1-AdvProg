@@ -51,13 +51,34 @@ public class Payment {
 
     private void validateVoucher() {
         String voucherCode = paymentData.get("voucherCode");
-        if (voucherCode == null || !voucherCode.matches("^ESHOP(?=(?:[^0-9]*\\d[^0-9]*){8}$)[A-Z]{11}$")) {
+        if (voucherCode == null || !validateVoc(voucherCode)) {
             this.status = PaymentStatus.REJECTED.getValue();
             this.order.setStatus(OrderStatus.FAILED.getValue());
             return;
         }
         this.status = PaymentStatus.SUCCESS.getValue(); // Jika valid, otomatis sukses
         this.order.setStatus(OrderStatus.SUCCESS.getValue());
+    }
+
+    private boolean validateVoc(String voucher){
+        if ((!voucher.startsWith("ESHOP")) || voucher.length() != 16) {
+            return false;
+        }
+        int numCount = 0;
+        int alphaCount = 0;
+        for (int i = 5; i < voucher.length(); i++) {
+            char ch = voucher.charAt(i);
+            if (ch >= '0' && ch <= '9') {
+                numCount++;
+            }
+            if (ch >= 'A' && ch <= 'Z') {
+                alphaCount++;
+            }
+        }
+        if (numCount == 8 && alphaCount == 3) {
+            return true;
+        }
+        return false;
     }
 
     private void validateCOD() {

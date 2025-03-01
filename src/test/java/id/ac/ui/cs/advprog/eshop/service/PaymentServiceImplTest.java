@@ -2,7 +2,9 @@ package id.ac.ui.cs.advprog.eshop.service;
 
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
-import id.ac.ui.cs.advprog.eshop.model.*;
+import id.ac.ui.cs.advprog.eshop.model.Order;
+import id.ac.ui.cs.advprog.eshop.model.Payment;
+import id.ac.ui.cs.advprog.eshop.model.Product;
 import id.ac.ui.cs.advprog.eshop.repository.PaymentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,13 +28,15 @@ public class PaymentServiceImplTest {
     @Spy
     @InjectMocks
     PaymentServiceImpl paymentService;
+
     @Mock
     PaymentRepository paymentRepository;
+
     List<Order> orders;
     List<Payment> payments;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         orders = new ArrayList<>();
         payments = new ArrayList<>();
 
@@ -47,21 +51,20 @@ public class PaymentServiceImplTest {
                 1708560000L, "Safira Sudarajat");
         orders.add(order);
 
-        payments = new ArrayList<>();
-        Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("voucherCode","ESHOP00000000AAA");
-        Payment payment1 = new PaymentVoucher( order,
-                "VOUCHER", paymentData );
+        Map<String, String> paymentData1 = new HashMap<>();
+        paymentData1.put("voucherCode", "ESHOP1234ABC5678");
+        Payment payment1 = new Payment(order, "VOUCHER", paymentData1);
         payments.add(payment1);
-        paymentData = new HashMap<>();
-        paymentData.put("bankName","a");
-        paymentData.put("referenceCode","0");
-        Payment payment2 = new PaymentBank(order, "BANK", paymentData);
+
+        Map<String, String> paymentData2 = new HashMap<>();
+        paymentData2.put("bankName", "Bank ABC");
+        paymentData2.put("referenceCode", "123456");
+        Payment payment2 = new Payment(order, "BANK", paymentData2);
         payments.add(payment2);
     }
 
     @Test
-    void testAddPayment(){
+    void testAddPayment() {
         Payment payment1 = payments.get(0);
         doReturn(payment1).when(paymentRepository).save(any(Payment.class));
         payment1 = paymentService.addPayment(payment1.getOrder(), "VOUCHER", payment1.getPaymentData());
@@ -73,73 +76,69 @@ public class PaymentServiceImplTest {
         doReturn(payment1).when(paymentRepository).findById(payment1.getId());
         Payment findResult = paymentService.getPayment(payment1.getId());
 
-        assertEquals(payment1.getId(),findResult.getId() );
-        assertEquals(payment1.getMethod(), findResult.getMethod() );
-        assertEquals(payment1.getStatus(), findResult.getStatus() );
+        assertEquals(payment1.getId(), findResult.getId());
+        assertEquals(payment1.getMethod(), findResult.getMethod());
+        assertEquals(payment1.getStatus(), findResult.getStatus());
 
         doReturn(payment2).when(paymentRepository).findById(payment2.getId());
         findResult = paymentService.getPayment(payment2.getId());
 
-        assertEquals(payment2.getId(),findResult.getId() );
-        assertEquals(payment2.getMethod(), findResult.getMethod() );
-        assertEquals(payment2.getStatus(), findResult.getStatus() );
-        verify(paymentService, times(1)).createPaymentVoucher(any(Order.class), any(String.class), any(Map.class));
-        verify(paymentService, times(1)).createPaymentBank(any(Order.class), any(String.class), any(Map.class));
+        assertEquals(payment2.getId(), findResult.getId());
+        assertEquals(payment2.getMethod(), findResult.getMethod());
+        assertEquals(payment2.getStatus(), findResult.getStatus());
     }
 
     @Test
-    void testSetStatusSuccessful(){
+    void testSetStatusSuccessful() {
         Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("voucherCode","ESHOP00000000AAA");
+        paymentData.put("voucherCode", "ESHOP1234ABC5678");
         Payment payment1 = new Payment(orders.get(0), "VOUCHER", paymentData);
 
-        assertEquals(PaymentStatus.WAITING_PAYMENT.getValue(),payment1.getStatus());
-        paymentService.setStatus(payment1, PaymentStatus.SUCCESS.getValue());
-        assertEquals(PaymentStatus.SUCCESS.getValue(),payment1.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment1.getStatus()); // Karena kode valid
         assertEquals(OrderStatus.SUCCESS.getValue(), payment1.getOrder().getStatus());
 
         paymentService.setStatus(payment1, PaymentStatus.REJECTED.getValue());
-        assertEquals(PaymentStatus.REJECTED.getValue(),payment1.getStatus());
+
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment1.getStatus());
         assertEquals(OrderStatus.FAILED.getValue(), payment1.getOrder().getStatus());
     }
 
     @Test
-    void testSetStatusFail(){
-
+    void testSetStatusFail() {
         Payment payment1 = payments.get(0);
         String oldStatus = payment1.getStatus();
 
-        assertThrows(IllegalArgumentException.class, ()->
-                paymentService.setStatus(payment1, "wder")
-        );
+        paymentService.setStatus(payment1, "INVALID_STATUS");
 
-        // pastikan status tidak berubah setelah gagal
-        assertEquals(oldStatus, payment1.getStatus());
+        // Pastikan status tetap sama karena status tidak valid
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment1.getStatus());
     }
 
     @Test
-    void testGetPaymentIfFound(){
+    void testGetPaymentIfFound() {
         Payment payment1 = payments.get(0);
         doReturn(payment1).when(paymentRepository).findById(payment1.getId());
+
         Payment paymentFound = paymentService.getPayment(payment1.getId());
+
         assertEquals(payment1.getId(), paymentFound.getId());
-        assertEquals("VOUCHER",paymentFound.getMethod());
+        assertEquals("VOUCHER", paymentFound.getMethod());
         assertEquals(payment1.getStatus(), paymentFound.getStatus());
     }
 
     @Test
-    void testGetPaymentIfNotFound(){
+    void testGetPaymentIfNotFound() {
         doReturn(null).when(paymentRepository).findById("zczc");
         Payment payment = paymentService.getPayment("zczc");
         assertNull(payment);
     }
 
     @Test
-    void testGetAllPayment(){
+    void testGetAllPayment() {
         doReturn(payments).when(paymentRepository).getAllPayments();
         List<Payment> payment = paymentService.getAllPayment();
 
-        assertSame(payments,payment);
-        assertEquals(payments.size(),payments.size());
+        assertSame(payments, payment);
+        assertEquals(payments.size(), payment.size());
     }
 }

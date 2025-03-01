@@ -11,18 +11,20 @@ public class PaymentRepository {
     private List<Payment> paymentData = new ArrayList<>();
 
     public Payment save(Payment payment){
-        for (Payment paymentData: paymentData){
-            if (paymentData.getId().equals(payment.getId())){
+        for (Payment storedPayment: paymentData){
+            if (storedPayment.getId().equals(payment.getId())){
                 throw new IllegalStateException();
             }
         }
         paymentData.add(payment);
 
-        // Perbarui status order sesuai status payment
-        if (payment.getStatus().equals("SUCCESS")) {
-            payment.getOrder().setStatus("SUCCESS");
-        } else if (payment.getStatus().equals("REJECTED")) {
-            payment.getOrder().setStatus("FAILED");
+        // Hanya atur status order jika belum diatur
+        if (payment.getOrder().getStatus() == null || payment.getOrder().getStatus().isEmpty()) {
+            if (payment.getStatus().equals("SUCCESS")) {
+                payment.getOrder().setStatus("SUCCESS");
+            } else if (payment.getStatus().equals("REJECTED")) {
+                payment.getOrder().setStatus("FAILED");
+            }
         }
 
         return payment;
