@@ -16,11 +16,16 @@ public class Payment {
 
     // ====== Constructor ======
     public Payment(String id, Order order, String method, Map<String, String> paymentData) {
-        this.id = (id != null) ? id : UUID.randomUUID().toString();
+        this(order, method, paymentData);
+        this.id = id;
+    }
+
+    public Payment(Order order, String method, Map<String, String>paymentData){
+        this.id = UUID.randomUUID().toString();
         this.order = order;
         this.method = method;
         this.paymentData = paymentData;
-        this.status = "PENDING";
+        this.status = "WAITING_PAYMENT";
 
         // Validasi sesuai metode pembayaran
         validatePayment();
@@ -30,21 +35,27 @@ public class Payment {
     private void validatePayment() {
         if (method.equals("VOUCHER")) {
             validateVoucher();
+            return;
         } else if (method.equals("COD")) {
             validateCOD();
+            return;
         } else if (method.equals("BANK")) {
             validateBankTransfer();
-        } else {
-            throw new IllegalArgumentException("Metode pembayaran tidak valid!");
+            return;
         }
+        this.status = "REJECTED";
+        this.order.setStatus("FAILED");
     }
 
     private void validateVoucher() {
         String voucherCode = paymentData.get("voucherCode");
-        if (voucherCode == null || !voucherCode.matches("^ESHOP\\d{8}[A-Z]{4}$")) {
-            throw new IllegalArgumentException("Voucher code tidak valid!");
+        if (voucherCode == null || !voucherCode.matches("^ESHOP(?=(?:[^0-9]*\\d[^0-9]*){8}$)[A-Z]{11}$")) {
+            this.status = "REJECTED";
+            this.order.setStatus("FAILED");
+            return;
         }
         this.status = "SUCCESS"; // Jika valid, otomatis sukses
+        this.order.setStatus("SUCCESS");
     }
 
     private void validateCOD() {
@@ -52,7 +63,12 @@ public class Payment {
         String deliveryFee = paymentData.get("deliveryFee");
 
         if (address == null || address.isEmpty() || deliveryFee == null || deliveryFee.isEmpty()) {
-            throw new IllegalArgumentException("Alamat atau biaya pengiriman tidak boleh kosong!");
+            this.status = "REJECTED";
+            this.order.setStatus("FAILED");
+        }
+        else {
+            this.status = "SUCCESS";
+            this.order.setStatus("SUCCESS"); // Order sukses jika payment sukses
         }
     }
 
@@ -61,21 +77,28 @@ public class Payment {
         String referenceCode = paymentData.get("referenceCode");
 
         if (bankName == null || bankName.isEmpty() || referenceCode == null || referenceCode.isEmpty()) {
-            throw new IllegalArgumentException("Nama bank dan kode referensi harus diisi!");
+            this.status = "REJECTED";
+            this.order.setStatus("FAILED");
+        }
+        else {
+            this.status = "SUCCESS";
+            this.order.setStatus("SUCCESS"); // Order sukses jika payment sukses
         }
     }
 
     // ====== Setter Status ======
     public void setStatus(String status) {
         if (!status.equals("SUCCESS") && !status.equals("REJECTED")) {
-            throw new IllegalArgumentException("Status tidak valid!");
+            this.status = "REJECTED";
+            this.order.setStatus("FAILED");
+            return;
         }
         this.status = status;
 
         // Ubah status Order berdasarkan status Payment
         if (status.equals("SUCCESS")) {
             this.order.setStatus("SUCCESS");
-        } else if (status.equals("REJECTED")) {
+        } else {
             this.order.setStatus("FAILED");
         }
     }
