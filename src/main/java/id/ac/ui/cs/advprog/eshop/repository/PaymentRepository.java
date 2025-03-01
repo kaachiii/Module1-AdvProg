@@ -1,5 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 
+import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import org.springframework.stereotype.Repository;
 
@@ -20,10 +22,10 @@ public class PaymentRepository {
 
         // Hanya atur status order jika belum diatur
         if (payment.getOrder().getStatus() == null || payment.getOrder().getStatus().isEmpty()) {
-            if (payment.getStatus().equals("SUCCESS")) {
-                payment.getOrder().setStatus("SUCCESS");
-            } else if (payment.getStatus().equals("REJECTED")) {
-                payment.getOrder().setStatus("FAILED");
+            if (payment.getStatus().equals(PaymentStatus.SUCCESS.getValue())) {
+                payment.getOrder().setStatus(OrderStatus.SUCCESS.getValue());
+            } else if (payment.getStatus().equals(PaymentStatus.REJECTED.getValue())) {
+                payment.getOrder().setStatus(OrderStatus.FAILED.getValue());
             }
         }
 

@@ -1,6 +1,7 @@
 package id.ac.ui.cs.advprog.eshop.service;
 
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
@@ -53,13 +54,13 @@ public class PaymentServiceImplTest {
 
         Map<String, String> paymentData1 = new HashMap<>();
         paymentData1.put("voucherCode", "ESHOP1234ABC5678");
-        Payment payment1 = new Payment(order, "VOUCHER", paymentData1);
+        Payment payment1 = new Payment(order, PaymentMethod.VOUCHER.getValue(), paymentData1);
         payments.add(payment1);
 
         Map<String, String> paymentData2 = new HashMap<>();
         paymentData2.put("bankName", "Bank ABC");
         paymentData2.put("referenceCode", "123456");
-        Payment payment2 = new Payment(order, "BANK", paymentData2);
+        Payment payment2 = new Payment(order, PaymentMethod.BANK.getValue(), paymentData2);
         payments.add(payment2);
     }
 
@@ -67,11 +68,11 @@ public class PaymentServiceImplTest {
     void testAddPayment() {
         Payment payment1 = payments.get(0);
         doReturn(payment1).when(paymentRepository).save(any(Payment.class));
-        payment1 = paymentService.addPayment(payment1.getOrder(), "VOUCHER", payment1.getPaymentData());
+        payment1 = paymentService.addPayment(payment1.getOrder(), PaymentMethod.VOUCHER.getValue(), payment1.getPaymentData());
 
         Payment payment2 = payments.get(1);
         doReturn(payment2).when(paymentRepository).save(any(Payment.class));
-        payment2 = paymentService.addPayment(payment2.getOrder(), "BANK", payment2.getPaymentData());
+        payment2 = paymentService.addPayment(payment2.getOrder(), PaymentMethod.BANK.getValue(), payment2.getPaymentData());
 
         doReturn(payment1).when(paymentRepository).findById(payment1.getId());
         Payment findResult = paymentService.getPayment(payment1.getId());
@@ -92,7 +93,7 @@ public class PaymentServiceImplTest {
     void testSetStatusSuccessful() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234ABC5678");
-        Payment payment1 = new Payment(orders.get(0), "VOUCHER", paymentData);
+        Payment payment1 = new Payment(orders.get(0), PaymentMethod.VOUCHER.getValue(), paymentData);
 
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment1.getStatus()); // Karena kode valid
         assertEquals(OrderStatus.SUCCESS.getValue(), payment1.getOrder().getStatus());
@@ -122,7 +123,7 @@ public class PaymentServiceImplTest {
         Payment paymentFound = paymentService.getPayment(payment1.getId());
 
         assertEquals(payment1.getId(), paymentFound.getId());
-        assertEquals("VOUCHER", paymentFound.getMethod());
+        assertEquals(PaymentMethod.VOUCHER.getValue(), paymentFound.getMethod());
         assertEquals(payment1.getStatus(), paymentFound.getStatus());
     }
 
