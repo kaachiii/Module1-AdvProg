@@ -166,4 +166,42 @@ public class PaymentTest {
         assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
         assertEquals(OrderStatus.FAILED.getValue(), orders.get(1).getStatus());
     }
+
+    @Test
+    void testCreatePaymentFailCODInvalidDeliveryFee() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("address", "Jl. Anggrek No. 1");
+        paymentData.put("deliveryFee", "-5000"); // Ongkos kirim negatif
+        Payment payment = new Payment("e7e7e7e7-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "COD", paymentData);
+
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+    }
+
+    @Test
+    void testCreatePaymentFailCODLongAddress() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("address", "Jl. Sangat Panjang Sekali Sampai Ribuan Karakter.................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................."); // Over limit
+        paymentData.put("deliveryFee", "10000");
+        Payment payment = new Payment("f8f8f8f8-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "COD", paymentData);
+
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+    }
+
+    @Test
+    void testSetPaymentStatusCOD() {
+        Map<String, String> paymentData = new HashMap<>();
+        paymentData.put("address", "Jl. Anggrek No. 1");
+        paymentData.put("deliveryFee", "10000");
+
+        Payment payment = new Payment("g9g9g9g9-9a7f-4603-92c2-eaf529271cc9", orders.get(1), "COD", paymentData);
+        payment.setStatus(PaymentStatus.SUCCESS.getValue());
+
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
+        assertEquals(OrderStatus.SUCCESS.getValue(), orders.get(1).getStatus());
+
+        payment.setStatus(PaymentStatus.REJECTED.getValue());
+
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
+        assertEquals(OrderStatus.FAILED.getValue(), orders.get(1).getStatus());
+    }
 }

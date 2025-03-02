@@ -86,7 +86,7 @@ public class Payment {
         String address = paymentData.get("address");
         String deliveryFee = paymentData.get("deliveryFee");
 
-        if (address == null || address.isEmpty() || deliveryFee == null || deliveryFee.isEmpty()) {
+        if (address == null || address.isEmpty() || address.length() > 100 || deliveryFee == null || deliveryFee.isEmpty() || Integer.parseInt(deliveryFee) < 0) {
             this.status = PaymentStatus.REJECTED.getValue();
             this.order.setStatus(OrderStatus.FAILED.getValue());
         }

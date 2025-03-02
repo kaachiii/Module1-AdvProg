@@ -113,6 +113,7 @@ public class PaymentServiceImplTest {
 
         // Pastikan status tetap sama karena status tidak valid
         assertEquals(PaymentStatus.REJECTED.getValue(), payment1.getStatus());
+        assertEquals(OrderStatus.FAILED.getValue(), payment1.getOrder().getStatus());
     }
 
     @Test
